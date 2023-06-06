@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  prepare release:
+  prepare_release:
     runs-on: ubuntu-latest
     steps:
 
