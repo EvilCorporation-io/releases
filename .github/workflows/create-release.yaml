@@ -50,6 +50,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GH_TOKEN }}
           file: docker-compose.yml
-          asset_name: docker-compose
+          asset_name: docker-compose.yml
           tag: ${{ github.ref }}
           overwrite: true

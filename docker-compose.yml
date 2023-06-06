@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ghcr.io/evilcorporation-io/backend:${ backend_sha }
+    image: ghcr.io/evilcorporation-io/backend:backend_sha
 
   frontend:
-    image:  ghcr.io/evilcorporation-io/frontend:${ frontend_sha }
+    image:  ghcr.io/evilcorporation-io/frontend:frontend_sha
