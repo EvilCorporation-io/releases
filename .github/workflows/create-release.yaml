@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    # chekout repo and get sha
       - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
@@ -24,13 +23,13 @@ jobs:
 
       - id: check_front
         run: |
-        cd frontend
-        echo "front_sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          cd frontend
+          echo "front_sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - id: check_back
         run: |
-        cd backend
-        echo "back_sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          cd backend
+          echo "back_sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - uses: jacobtomlinson/gha-find-replace@v2
         with:
