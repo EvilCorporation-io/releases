@@ -13,12 +13,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: EvilCorporation-io/frontend
-          token: ${{ secret.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           path: frontend
       - uses: actions/checkout@v3
         with:
           repository: EvilCorporation-io/backend
-          token: ${{ secret.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           path: backend
 
       - id: check_front
