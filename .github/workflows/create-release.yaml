@@ -1,0 +1,56 @@
+name: create release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  prepare release:
+    runs-on: ubuntu-latest
+    steps:
+
+    # chekout repo and get sha
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: EvilCorporation-io/frontend
+          token: ${{ secret.GH_TOKEN }}
+          path: frontend
+      - uses: actions/checkout@v3
+        with:
+          repository: EvilCorporation-io/backend
+          token: ${{ secret.GH_TOKEN }}
+          path: backend
+
+      - id: check_front
+        run: |
+        cd frontend
+        echo "front_sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - id: check_back
+        run: |
+        cd backend
+        echo "back_sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "backend_sha"
+          replace: ${{ env.back_sha }}
+          regex: false
+          include: 'docker-compose.yml'
+
+      - uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "frontend_sha"
+          replace: ${{ env.front_sha }}
+          regex: false
+          include: 'docker-compose.yml'
+
+      - name: Upload docker-compose to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: docker-compose.yml
+          asset_name: docker-compose
+          tag: ${{ github.ref }}
+          overwrite: true
